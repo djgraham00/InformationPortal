@@ -1,0 +1,51 @@
+{{ component('APHeader') }}
+
+<main role="main" class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./APHome">Home</a></li>
+            <li class="breadcrumb-item active"><a href="./ManageOrgs">Organization Management</a> </li>
+        </ol>
+    </nav>
+    <div class="card" style="margin-bottom: 20px;">
+        <h5 class="card-header"><span class="float-left">Organization Management</span> <span class="float-right"><a href="./AddOrg" class="btn btn-sm btn-outline-secondary float-right">Add Organization</a> </span></h5>
+        <div class="card-body" style="padding: 0px;">
+            <div class="table-responsive">
+                <table class="table ">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Display Name</th>
+                        <th scope="col">Org ID</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for org in orgs %}
+                        <tr>
+                            <td>{{ org.orgDisplay }}</td>
+                            <td>{{ org.orgID }}</td>
+                            <td>
+                                <form method="post">
+                                    <input type="hidden" name="id" value="{{ org.id }}">
+                                    <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                                </form>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+</main>
+
+<script src="static/js/jquery.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/offcanvas.js"></script>
+<script src="static/js/coreauth.js"></script>
+</body>
+</html>

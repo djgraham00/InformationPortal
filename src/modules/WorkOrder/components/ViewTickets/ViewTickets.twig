@@ -1,0 +1,84 @@
+{{ component('APHeader') }}
+
+<style>
+    .container {
+        max-width: 100%;
+    }
+</style>
+
+<div class="container">
+    <div class="row" >
+
+        {{ component('WOSidebar') }}
+
+        <!-- Main page content -->
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./home">Home</a></li>
+
+                    <li class="breadcrumb-item {% if site == false %} active {% endif %}"><a href="./ViewTickets">Support Tickets</a></li>
+                    {% if site %}
+                        <li class="breadcrumb-item active"><a href="./ViewTickets?site={{ site.id }}">{{ site.orgDisplay }}</a></li>
+                    {% endif %}
+                </ol>
+            </nav>
+
+            <div class="card" style="margin-bottom: 20px;">
+                <h5 class="card-header"><span class="float-left">{{ pageTitle }}</span> <span class="float-right"><a href="./NewTicket" class="btn btn-sm btn-outline-secondary float-right">New Ticket</a> </span></h5>
+                <div class="card-body" style="padding: 0px;">
+                    <div class="table-responsive">
+                        <table class="table ">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Ticket Title</th>
+                                <th scope="col">Site</th>
+                                <th scope="col">Room</th>
+                                <th scope="col">Priority</th>
+                                <th scope="col">View Ticket</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if tickets %}
+                                {% for ticket in tickets %}
+                                <tr>
+                                    <th scope="row">
+                                        {% if ticket.GetUser %}
+                                            {{ ticket.GetUser.fullName }}
+                                        {% else %}
+                                            {{ ticket.coreauth_user }}
+                                        {% endif %}
+                                    </th>
+                                    <td>{{ ticket.ticketTitle }}</td>
+                                    <td>{{ ticket.GetSite.orgDisplay }}</td>
+                                    <td>
+                                        {% if ticket.GetUser %}
+                                            {{ ticket.GetUser.Profile.room }}
+                                        {% else %}
+                                            Undefined
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ ticket.priority }}</td>
+                                    <td><a href="./ViewTicket?id={{ ticket.id }}" class="btn btn-sm btn-primary">View Ticket</a></td>
+                                </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/offcanvas.js"></script>
+    <script src="static/js/coreauth.js"></script>
+    </body>
+    </html>
+
+

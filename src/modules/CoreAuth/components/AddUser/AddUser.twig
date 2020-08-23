@@ -1,0 +1,117 @@
+
+{{ component('APHeader') }}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./home">Home</a></li>
+                    <li class="breadcrumb-item"><a href="./AddUser">Add User</a></li>
+                </ol>
+            </nav>
+    <div class="card" style="margin-bottom: 20px;">
+                <h5 class="card-header"><span class="float-left">Add User</span></h5>
+                <div class="card-body">
+                    <form method="post" onsubmit="addUser()">
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" class="form-control" name="fName" id="exampleFormControlInput1" placeholder="Drew">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" class="form-control" name="lName" id="exampleFormControlInput1" placeholder="Graham">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Username</label>
+                                    <input type="text" class="form-control" name="username" id="exampleFormControlInput1" placeholder="Username">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Email Address</label>
+                                    <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="sample@example.com">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="siteCode">Site Code</label>
+                                    <input type="text" class="form-control" name="siteCode" id="exampleFormControlInput1" placeholder="SITE-CODE">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="rm">Room Number</label>
+                                    <input type="text" class="form-control" name="rm" id="exampleFormControlInput1" placeholder="104">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <small class="d-block text-right mt-3">
+                            <button class="btn btn-sm btn-primary" onclick="addUser(); return false;">Add User</button>
+                        </small>
+                    </form>
+                </div>
+
+            </div>
+</div>
+
+<script src="static/js/jquery.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/offcanvas.js"></script>
+<script src="static/js/coreauth.js"></script>
+
+<script>
+    function addUser() {
+
+        $.ajax({
+            url: './AddUser',
+            type: 'POST',
+            data: {
+                'fName'    : $('[name=fName]').val(),
+                'lName'    : $('[name=lName]').val(),
+                'username' : $('[name=username]').val(),
+                'email'    : $('[name=email]').val(),
+                'rm'       : $('[name=rm]').val(),
+                'site'     : $('[name=siteCode]').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+
+                if(data.success === true){
+                    addAlert("warning", "User has successfully been added");
+                   $('[name=fName]').val('');
+                   $('[name=lName]').val('');
+                   $('[name=username]').val('');
+                   $('[name=email]').val('');
+                   $('[name=rm]').val('');
+                   $('[name=siteCode]').val('');
+                }
+            },
+            error: function (request, error) {
+                console.log(request);
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

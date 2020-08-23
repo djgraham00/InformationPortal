@@ -1,0 +1,19 @@
+{
+    "MOD_FILE"            : "CoreAuth.php",
+    "MOD_CLASS"           : "CoreAuth",
+    "MOD_HAS_ROUTES"      : true,
+    "MOD_ROUTES_VAR"      : "rts",
+    "MOD_HAS_MODELS"      : true,
+    "MOD_MODEL_DIR"       : "models",
+    "MOD_COMPONENT_DIR"   : "components",
+    "MOD_TEMPLATE_DIR"    : "templates",
+    "MOD_MODEL_INIT"      : "__initModels",
+    "LoginRdir"           : "./APHome",
+    "APP_HOME_URL"        : "./APHome",
+    "UseLDAP"             : true,
+    "LDAP_Server"         : "PRIMARY_AD_DC",
+    "AD_Domain"           : "AD_DOMAIN",
+    "Base_DN"             : "DOMAIN_BASE_DN",
+    "SERVER_SCRIPTS_DIR"  : "C:\\ITDEPT_Scripts\\",
+    "AuthorizedUsers"     : [  ]
+}

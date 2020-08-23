@@ -1,0 +1,14 @@
+<!-- Left Sidebar -->
+<div class="col-md-auto">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">My Organizations</div>
+        <div class="list-group list-group-flush">
+            <a href="./ViewTickets" class="list-group-item list-group-item-action bg-light">Overview</a>
+            {% for site in sites %}
+                <a href="./ViewTickets?site={{ site.id }}" class="list-group-item list-group-item-action bg-light">{{ site.orgDisplay }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+</div>

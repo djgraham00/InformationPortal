@@ -1,0 +1,86 @@
+    {{ component('APHeader') }}
+
+    <style>
+        .container {
+            max-width: 100%;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row" >
+
+            {{ component('WOSidebar') }}
+
+            <!-- Main page content -->
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+
+                        <li class="breadcrumb-item"><a href="./home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="./ViewTickets">Support Tickets</a></li>
+                        <li class="breadcrumb-item"><a href="./NewTicket">New Ticket</a></li>
+                    </ol>
+                </nav>
+
+                <div class="card" style="margin-bottom: 20px;">
+                    <h5 class="card-header"><span class="float-left">New Support Ticket</span></h5>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Title</label>
+                                <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="e.x. Can't print to copier...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Email</label>
+                                <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="e.x. Can't print to copier...">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="priortySelect">Priority</label>
+                                <select class="form-control" id="priortySelect" name="priority">
+                                    <option>Low</option>
+                                    <option>Normal</option>
+                                    <option>High</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="siteSelect">Organization</label>
+                                <select class="form-control" id="siteSelect" name="org">
+                                    {% for org in sites %}
+                                        <option value="{{ org.id }}">{{ org.orgDisplay }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Room #</label>
+                                <input type="text" class="form-control" name="room" id="exampleFormControlInput1" placeholder="205">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Ticket Details</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="body" rows="3"></textarea>
+                            </div>
+
+
+                            <small class="d-block text-right mt-3">
+                                <button class="btn btn-sm btn-primary" type="submit">Open Ticket</button>
+                            </small>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/offcanvas.js"></script>
+    <script src="static/js/coreauth.js"></script>
+    </body>
+    </html>

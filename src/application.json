@@ -1,0 +1,11 @@
+{
+  "APP_NAME"        : "Information Portal",
+  "APP_ORG"         : "N/A",
+  "APP_MODULE_DIR"  : "modules",
+  "APP_BASE_URL"    : "URL_TO_SITE",
+  "APP_DB_TYPE"     : "mysql", 
+  "APP_DB_HOST"     : "localhost",
+  "APP_DB_NAME"     : "DB_NAME",
+  "APP_DB_USER"     : "DB_USERNAME",
+  "APP_DB_PASS"     : "DB_PASSWORD"
+}

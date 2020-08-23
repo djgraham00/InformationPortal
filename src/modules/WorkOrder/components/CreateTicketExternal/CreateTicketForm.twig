@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{{ ModularPHP.APP_NAME }}</title>
+    <base href="{{ ModularPHP.APP_BASE_URL }}" target="_blank">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script type="text/javascript" src="static/js/jquery.js"></script>
+    <script type="text/javascript" src="static/js/common.js"></script>
+    <script type="text/javascript" src="static/js/coreauth.js"></script>
+
+    <script src="static/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/css/bootstrap-login.css">
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+<body class="text-left">
+
+<form class="form-signin" method="post" onsubmit='addTicket(); return false;'>
+
+    <img src="./static/img/pthorizontal.png" height="120">
+
+    <h1 class="h3 mb-3 font-weight-normal">New Support Ticket</h1>
+    <span style="text-align: left;" id="errView"></span>
+
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Title</label>
+        <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="e.x. Can't print to copier...">
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+            <div class="form-group">
+                <label for="priortySelect">Priority</label>
+                <select class="form-control" id="priortySelect" name="priority">
+                    <option>Low</option>
+                    <option>Normal</option>
+                    <option>High</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="siteSelect">Site</label>
+                <select class="form-control" id="siteSelect" name="org">
+                    {% for site in Sites %}
+                        <option value="{{ site.id }}">{{ site.orgDisplay }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Email</label>
+        <input type="text" class="form-control" name="email" id="exampleFormControlInput1" placeholder="support@p-t.k12.ok.us">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Ticket Details</label>
+        <!-- Create the editor container -->
+        <div id="editor">
+
+        </div>
+    </div>
+
+    <!-- <div class="form-group">
+        <label>Attachment</label>
+        <input class="form-control" type="file" name="attachment">
+    </div> -->
+
+
+    <small class="d-block text-right mt-3">
+        <button class="btn btn-sm btn-primary" type="submit">Open Ticket</button>
+    </small>
+    <p class="mt-5 mb-3 text-muted text-center">Perkins-Tryon Public Schools <br/> Information Technology Department</p>
+
+    <script>
+        function addTicket() {
+
+            $.ajax({
+                url: './Support',
+                type: 'POST',
+                data: {
+                    'title': $('[name=title]').val(),
+                    'priority': $('[name=priority]').val(),
+                    'org': $('[name=org]').val(),
+                    'email': $('[name=email]').val(),
+                    'body': document.getElementById('editor').firstChild.innerHTML
+                },
+                dataType: 'json',
+                success: function (data) {
+
+                    if(data.success === true){
+                        addAlert("warning", "Your ticket has been added to the queue.");
+                        $('[name=title]').val('');
+                        $('[name=room]').val('');
+                        document.getElementById('editor').firstChild.innerHTML = "<br/>";
+                        $('[name=email]').val('');
+                    }
+                    else {
+                        addAlert("warning", "Unable to create ticket. Please email <a href=\"mailto:djgraham@p-t.k12.ok.us\">djgraham@p-t.k12.ok.us</a> for assistance.");
+                    }
+                },
+                error: function (request, error) {
+                    console.log(request);
+                }
+            });
+        }
+
+    </script>
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+    </script>
+</form>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{{ component('APHeader') }}
+
+<main role="main" class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./APHome">Home</a></li>
+            <li class="breadcrumb-item active"><a href="./TimeClock">Time Clock</a> </li>
+        </ol>
+    </nav>
+    <div class="card" style="margin-bottom: 20px;">
+        <h5 class="card-header"><span class="float-left">Time Clock</h5>
+        <div class="card-body" style="padding: 0px;">
+
+            <div style="text-align: center;  margin: 20px;">
+            <h4>Current Time</h4>
+            <H1 id="time" style="font-size: 40pt;"></H1>
+            </div>
+            <div style="text-align: center; padding: 15px;">
+                <button class="btn btn-lg btn-outline-success">Clock In</button>
+                <button class="btn btn-lg btn-outline-danger">Clock Out</button>
+            </div>
+        </div>
+
+</main>
+
+
+<script src="static/js/jquery.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/offcanvas.js"></script>
+<script src="static/js/coreauth.js"></script>
+
+<script>
+
+    $.ajax({
+        url: './TimeClock',
+        type: 'POST',
+        data: {
+            ''
+        },
+        dataType: 'json',
+        success: function (data) {
+
+            if(data.success === true){
+                addAlert("warning", "Your ticket has been added to the queue.");
+                $('[name=title]').val('');
+                $('[name=room]').val('');
+                document.getElementById('editor').innerHTML = "";
+                $('[name=email]').val('');
+            }
+            else {
+                addAlert("warning", "Unable to create ticket. Please email <a href=\"mailto:djgraham@p-t.k12.ok.us\">djgraham@p-t.k12.ok.us</a> for assistance.");
+            }
+        },
+        error: function (request, error) {
+            console.log(request);
+        }
+    });
+
+    function tcPunch() {
+
+        $.ajax({
+            url: './TimeClock',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+
+                if(data.success === true){
+                    addAlert("warning", "Your ticket has been added to the queue.");
+                    $('[name=title]').val('');
+                    $('[name=room]').val('');
+                    document.getElementById('editor').innerHTML = "";
+                    $('[name=email]').val('');
+                }
+                else {
+                    addAlert("warning", "Unable to create ticket. Please email <a href=\"mailto:djgraham@p-t.k12.ok.us\">djgraham@p-t.k12.ok.us</a> for assistance.");
+                }
+            },
+            error: function (request, error) {
+                console.log(request);
+            }
+        });
+    }
+
+
+    setInterval(function(){
+        let d = new Date();
+        document.getElementById('time').innerText = d.toLocaleTimeString();
+    }, 1);
+
+
+</script>
+
+</body>
+</html>

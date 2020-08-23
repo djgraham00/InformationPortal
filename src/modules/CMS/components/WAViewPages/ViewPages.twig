@@ -1,0 +1,52 @@
+{{ component('APHeader') }}
+
+<style>
+    .container {
+        max-width: 100%;
+    }
+</style>
+
+<div class="container">
+    <div class="row" >
+
+        {{ component('WASidebar') }}
+
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./home">Home</a></li>
+                    <li class="breadcrumb-item"><a href="./CMSAdmin">CMS Admin</a></li>
+                    <li class="breadcrumb-item active"><a href="./CMSViewPages">Pages</a></li>
+                </ol>
+            </nav>
+
+            <div class="card" style="margin-bottom: 20px;">
+                <h5 class="card-header"><span class="float-left">Pages</span> <span class="float-right"><a href="./CMSNewPage" class="btn btn-sm btn-outline-secondary float-right">New Page</a> </span></h5>
+                <div class="card-body" style="padding: 0px;">
+                    <div class="table-responsive">
+                        <table class="table ">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Page Title</th>
+                                <th scope="col">Route</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if pages %}
+                                {% for page in pages %}
+                                    <tr>
+                                        <th scope="row">{{ page.pageTitle }}</th>
+                                        <td>{{ page.pageRoute }}</td>
+                                        <td><a href="./CMSEditPage?act=del&id={{ page.id }}" class="btn btn-sm btn-primary">Edit</a> <a href="./CMSDeletePage?id={{ page.id }}" class="btn btn-sm btn-danger">Delete</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

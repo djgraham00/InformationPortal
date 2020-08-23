@@ -1,0 +1,15 @@
+{
+  "MOD_FILE"         : "WorkOrder.php",
+  "MOD_CLASS"        : "WorkOrder",
+  "MOD_HAS_ROUTES"   : true,
+  "MOD_ROUTES_VAR"   : "rts",
+  "MOD_HAS_MODELS"   : true,
+  "MOD_MODEL_DIR"    : "models",
+  "MOD_MODEL_INIT"   : "__initModels",
+  "MOD_COMPONENT_DIR"   : "components",
+  "MOD_TEMPLATE_DIR"    : "templates",
+  "MOD_DEPENDENCIES" : [
+    "CoreAuth",
+    "AdminPanel"
+  ]
+}
